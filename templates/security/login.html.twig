@@ -38,12 +38,12 @@
                     <button class="btn btn-lg btn-secondary ml-4" id="registro">
                         Nuevo Usuario
                     </button>
-                    {# <div id="dialog" title="Añadir Jugador"> 
+                    <div id="dialog" title="Añadir Usuario"> 
                         <form>
-                            <p>Usuario<input type="text" id="dorsal" placeholder='Indica un Nombre de Usuario'></p>
-                            <p>Contraseña<input type="text" id="jugador" placeholder='Inserta una Contraseña'></p>
+                            <p>Usuario<input type="text" id="nUsuario" placeholder='Indica un Nombre de Usuario'></p>
+                            <p>Contraseña<input type="password" id="nClave" placeholder='Inserta una Contraseña'></p>
                         </form>
-                    </div> #}
+                    </div>
                 </div>
             </div>
         </form>
@@ -55,7 +55,7 @@
                e.preventDefault();
               /* alert('Funciona');
               Redirige a la Página de Registro para dar de Alta Nuevo Usuario*/
-              location.href = "{{ path('app_registro') }}";
+            /*  location.href = "{{ path('app_registro') }}";*/
                 $('#dialog').dialog('open');
             });
 

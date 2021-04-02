@@ -23,7 +23,7 @@ class Enfermedad
     private $nombreE;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Ficha::class, inversedBy="enfermedads")
+     * @ORM\ManyToOne(targetEntity=Ficha::class, inversedBy="enfermedades")
      */
     private $ficha;
 
