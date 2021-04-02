@@ -3,26 +3,25 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div class="container-fluid mt-4">
     <div class="row-fluid">
         <form method="post">
             {# Mensaje de error al insertar datos erroneos #}
             {% if error %}
-            <div class="alert alert-danger">
-                {{ 'Error en los Datos introducidos'|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger">
+                  {{ 'Error en los Datos introducidos'|trans(error.messageData, 'security') }}</div>
             {% endif %}
             {# Mensaje al acceder al Login estando ya registrado, y opciones #}
             {% if app.user %}
-            <div class="alert alert-success">{# parámetro con el nombre de usuario #}
-                {{ 'Ya has iniciado Sesión: ' }}{{ app.user.username }}
-                {# path con la ruta a donde redirige #}
-                <button class="btn btn-danger"><a href="{{ path('app_logout') }}">Logout</a></button>
-                <button class="btn btn-warning"><a href="{{ path('principal') }}" class="ml-5">Página
+                <div class="alert alert-success">{# parámetro con el nombre de usuario #}
+                    {{ 'Ya has iniciado Sesión: ' }}{{ app.user.username }}
+                    {# path con la ruta a donde redirige #}
+                    <button class="btn btn-danger"><a href="{{ path('app_logout') }}">Logout</a></button>
+                    <button class="btn btn-warning"><a href="{{ path('principal') }}" class="ml-5">Página
                         Principal</a></button>
-            </div>
+                </div>
             {% endif %}
             {# Formulario de Login #}
-            <div class="col col-6 offset-3 border border-primary rounded p-4 bg-gradient {# text-white #}  fw-bolder">
+            <div class="col col-6 offset-3 border border-primary rounded p-4 bg-light {# text-white #}  fw-bolder">
                 <h1 class="h3 mb-3 text-center">ACCEDER</h1>
                 <label for="inputUsername">Usuario</label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control"
@@ -34,11 +33,11 @@
                     <button class="btn btn-lg btn-primary" type="submit">
                         Comenzar
                     </button>
-                    
+
                     <button class="btn btn-lg btn-secondary ml-4" id="registro">
                         Nuevo Usuario
                     </button>
-                    <div id="dialog" title="Añadir Usuario"> 
+                    <div id="dialog" title="Añadir Usuario">
                         <form>
                             <p>Usuario<input type="text" id="nUsuario" placeholder='Indica un Nombre de Usuario'></p>
                             <p>Contraseña<input type="password" id="nClave" placeholder='Inserta una Contraseña'></p>
@@ -48,14 +47,14 @@
             </div>
         </form>
     </div>
-    
+
     <script>
         $(function () {
-           $('#registro').click(function (e) {
-               e.preventDefault();
-              /* alert('Funciona');
-              Redirige a la Página de Registro para dar de Alta Nuevo Usuario*/
-            /*  location.href = "{{ path('app_registro') }}";*/
+            $('#registro').click(function (e) {
+                e.preventDefault();
+                /* alert('Funciona');
+                Redirige a la Página de Registro para dar de Alta Nuevo Usuario*/
+                /*  location.href = "{{ path('app_registro') }}";*/
                 $('#dialog').dialog('open');
             });
 
@@ -63,17 +62,13 @@
                 autoOpen: false,
                 modal: true,
                 buttons: {
-                    'Añadir': function () {
-                         },
+                    'Añadir': function () {},
                     'Cancel': function () {
                         $(this).dialog('close');
                     }
                 }
             })
 
-
-
         });
-
     </script>
     {% endblock %}

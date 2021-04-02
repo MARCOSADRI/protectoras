@@ -16,17 +16,12 @@
           <a class="nav-link" href="{# {{ path('app_usuarios') }} #}">Listar Usuarios</a>
         </li>
       {% endif %}
-
-
-
-
-
-
-     
    </ul>
    <ul class="navbar-nav cerrar ">
+   {% if app.user %}
      <li class="nav-item">{# path con la ruta a donde redirige LOGOUT/ cierra la sesión#}
        <a class="nav-link" href="{{ path('app_logout') }}">Cerrar Sesión</a>
      </li>
+   {% endif %}
    </ul>
  </nav>
