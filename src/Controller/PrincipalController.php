@@ -12,7 +12,7 @@ class PrincipalController extends AbstractController
     public function index(): Response
     {
         return $this->render('principal/index.html.twig', [
-            'controller_name' => 'Página Principal de Bienvenida',
+            'controller_name' => 'Bienvenido a Protectora SOPP',
         ]);
     }
 }
