@@ -1,0 +1,16 @@
+/*Estilo para el botón de Cerrar Sesión*/
+.cerrar{
+    background-color: rgb(245, 86, 23);
+    border-radius: 30%;
+    text-align:end;
+}
+/*Estilo para el botón de Cerrar Sesión*/
+#imgCabecera{
+    width: 2%;
+}
+.navbar{
+    justify-content: space-around;
+}
+.navbar-nav{
+    justify-content: center;
+}

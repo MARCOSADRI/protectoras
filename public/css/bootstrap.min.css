@@ -6,14 +6,6 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-
- /*Estilo para el botón de Cerrar Sesión*/
-.cerrar{
-    background-color: rgb(245, 86, 23);
-    border-radius: 30%;
-    text-align:end;
-}
-
 :root {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
