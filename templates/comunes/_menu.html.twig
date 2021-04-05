@@ -1,36 +1,66 @@
-<nav class="navbar fixed-top navbar-expand navbar-dark bg-dark "><!-- justify-content-between -->
-  <img id="imgCabecera" src="./img/logoCabecera.png"/>
-  <a class="navbar-brand">Usuario:
-    {{ app.user ? app.user.username : "Debe logearse"}}
+<nav class="navbar fixed-top navbar-expand navbar-dark bg-dark ">
+  <img id="imgCabecera" src="./img/logoCabecera.png" />
+  <a class="navbar-brand">
+    <!-- Muestra mensaje de bienvenida o datos del usuario logeado -->
+    {{ app.user ? "Usuario: " ~ app.user.username : "Bienvenid@: Debe logearse"}}
   </a>
   {# Si está logeado muestra opción cerrar sesión y Consultas, sino hay 2 opciones
       -> logearse con el usuario o registrar un nuevo usuario (Redirige cada uno a su página) #}
   {% if app.user %}
-  <ul class="navbar-nav">
+  <ul class="navbar-nav bg-secondary border-2 rounded-2">
     <li class="nav-item ">{# path con la ruta a donde redirige PRINCIPAL#}
       <a class="nav-link" href="{{ path('principal') }}">Inicio</a>
-    </li>   
-    <li class="nav-item ">{# path con la ruta a donde redirige al Listado de Animales#}
-      <a class="nav-link" href="{# {{ path('app_animales') }} #}">Listar Animales</a>
     </li>
-    {# Para que únicamenente sea accesible al Administrador No al resto de Usuarios #}
+  </ul>
+  <ul class="navbar-nav">
+    <li class="nav-item dropdown">
+      <!-- Muestra opciones de listar Animales -->
+      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nuestros
+        Animales</a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <li><a class="dropdown-item" href="#">Todos para Adoptar</a></li>
+        <li><a class="dropdown-item" href="#">Perros para Adoptar</a></li>
+        <li><a class="dropdown-item" href="#">Gatos para Adoptar</a></li>
+        <li><a class="dropdown-item" href="#">Roedores y más para Adoptar</a></li>
+        <!-- El Administrador tendrá las Opciones de Listar Todos los Animales o sólo los Adoptados-->
+        {% if is_granted('ROLE_ADMIN') %}
+        <hr>
+        <li>
+          <a class="dropdown-item" href="{# {{ path('app_adoptados') }} #}">Adoptados</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="{# {{ path('app_listadoCompleto') }} #}">Todos los Animales</a>
+        </li>
+        {% endif %}
+      </ul>
+    </li>
+    {# Para que únicamenente sea visible/accesible al Administrador No al resto de Usuarios #}
     {% if is_granted('ROLE_ADMIN') %}
-    <li class="nav-item ">{# path con la ruta a donde redirige Listado de Usuariox#}
-      <a class="nav-link" href="{# {{ path('app_usuarios') }} #}">Listar Usuarios</a>
+    <li class="nav-item dropdown">{# path con la ruta a donde redirige Listado de Usuarios #}
+      <a class="nav-link dropdown-toggle" href="{# {{ path('app_usuarios') }} #}" role="button"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        Listar Usuarios
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <li><a class="dropdown-item" href="#">Usuarios Registrados</a></li>
+        <li><a class="dropdown-item" href="#">Usuarios Adoptadores</a></li>
+      </ul>
     </li>
     {% endif %}
   </ul>
-  <ul class="navbar-nav">
+  <ul class="navbar-nav navbar-right">
     <li class="nav-item cerrar">{# path con la ruta a donde redirige LOGOUT/ cierra la sesión#}
       <a class="nav-link" href="{{ path('app_logout') }}">Cerrar Sesión</a>
     </li>
     {% else %}
-    <li class="nav-item ">{# path con la ruta a donde redirige LOGIN#}
-      <a class="nav-link" href="{{ path('app_login') }}">Login</a>
-    </li>
-    <li class="nav-item ">{# path con la ruta a donde redirige a REGISTRO#}
-      <a class="nav-link" href=" {{ path('app_registro') }}">Registrarse</a>
-    </li>
+    <ul class="navbar-nav" id='login'>
+      <li class="nav-item bg-primary border rounded">{# path con la ruta a donde redirige LOGIN#}
+        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+      </li>
+      <li class="nav-item bg-secondary border rounded">{# path con la ruta a donde redirige a REGISTRO#}
+        <a class="nav-link" href=" {{ path('app_registro') }}">Registrarse</a>
+      </li>
+    </ul>
     {% endif %}
   </ul>
 </nav>

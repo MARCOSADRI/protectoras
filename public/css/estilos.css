@@ -4,13 +4,24 @@
     border-radius: 30%;
     text-align:end;
 }
-/*Estilo para el botón de Cerrar Sesión*/
+/*Estilo para la Imágen de Cabecera*/
 #imgCabecera{
     width: 2%;
 }
+/*Estilo para la Barra de Navegación / Menús*/
 .navbar{
     justify-content: space-around;
 }
-.navbar-nav{
-    justify-content: center;
+
+/* Para desplegar la lista con pasar el ratón sobre ella 
+li:hover ul{
+    display: block;
+}*/
+/*Estilo para botón del Login y Registro*/
+#login li{
+    min-width: 100px;
+    text-align: center;
+}
+#login li:last-child{
+    margin-left: 5%;
 }
