@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Plantilla Base!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
             <link rel="stylesheet" type="text/css" href="/css/estilos.css">
@@ -24,10 +24,12 @@
         {% endblock %}
     </head>
     <body>
+    {# Importa la Cabecera Menú para incluir en todas las Plantillas #}
      {% include 'comunes/_menu.html.twig' %}
         <div class="container-fluid mt-5">
             {% block body %}{% endblock %}
         </div>
+    {# Importa el Pie de Página para incluir en todas las Plantillas #}
     {% include 'comunes/_piePagina.html.twig' %}
         {% block javascripts %}
             {# <script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script> #}
