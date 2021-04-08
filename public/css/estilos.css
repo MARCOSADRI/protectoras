@@ -1,3 +1,7 @@
+/*Estilo al Cuerpo para que se muestre correctamente con la cabecera*/
+body{
+    margin-top: 4%;
+}
 /*Estilo para el botón de Cerrar Sesión*/
 .cerrar{
     background-color: rgb(245, 86, 23);
@@ -6,7 +10,7 @@
 }
 /*Estilo para la Imágen de Cabecera*/
 #imgCabecera{
-    width: 2%;
+    width: 8%;
 }
 /*Estilo para la Barra de Navegación / Menús*/
 .navbar{
@@ -24,4 +28,11 @@ li:hover ul{
 }
 #login li:last-child{
     margin-left: 5%;
+}
+/*Estilo para la imágen de fondo del Pie de Página*/
+.fixed-bottom{
+    background-image: url('../img/cabecera.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size:contain;
 }
