@@ -8,6 +8,13 @@ body{
     border-radius: 30%;
     text-align:end;
 }
+.cerrar:hover{
+    background-color: rgb(133, 4, 4);
+    border-radius: 30%;
+    text-align:end;
+    font-weight: bolder;
+}
+
 /*Estilo para la Imágen de Cabecera*/
 #imgCabecera{
     width: 8%;
@@ -26,6 +33,16 @@ li:hover ul{
     min-width: 100px;
     text-align: center;
 }
+
+#login a:hover{
+    background-color: rgb(7, 77, 55);
+    border: 2px solid chartreuse;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+
+
+
 #login li:last-child{
     margin-left: 5%;
 }
@@ -35,4 +52,10 @@ li:hover ul{
     background-repeat: no-repeat;
     background-position: right;
     background-size:contain;
+}
+.opcion:hover{
+    background-color: rgb(7, 77, 55);
+    border: 2px solid chartreuse;
+    border-radius: 10px;
+    font-weight: bolder;
 }
