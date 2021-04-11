@@ -1,0 +1,17 @@
+#contenedor{
+    position: absolute;
+    display: flex;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 5px 10px 10px rgb(82, 77, 77);
+}
+#expresion{
+    margin-top: 20px;
+}
+#mensaje{
+    margin-left: 5px;
+}

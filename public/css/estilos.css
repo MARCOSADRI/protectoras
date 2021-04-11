@@ -22,12 +22,16 @@ body{
 /*Estilo para la Barra de Navegación / Menús*/
 .navbar{
     justify-content: space-around;
+    background-image: linear-gradient(to bottom, #000 0%, #666666 95%);
+    padding: 0.2rem;
 }
-
-/* Para desplegar la lista con pasar el ratón sobre ella 
-li:hover ul{
+/*Desplegar Menús al pasar el ratón*/
+nav ul li:hover > ul {
     display: block;
-}*/
+    left: 25%;  
+    background-color: rgba(50, 106, 238, 0.5);
+} 
+
 /*Estilo para botón del Login y Registro*/
 #login li{
     min-width: 100px;
@@ -40,13 +44,12 @@ li:hover ul{
     border-radius: 10px;
     font-weight: bolder;
 }
-
-
-
 #login li:last-child{
     margin-left: 5%;
 }
-/*Estilo para la imágen de fondo del Pie de Página*/
+
+
+/*Estilo para el Pie de Página: la imágen de fondo, iconos*/
 .fixed-bottom{
     background-image: url('../img/cabecera.png');
     background-repeat: no-repeat;
@@ -59,3 +62,12 @@ li:hover ul{
     border-radius: 10px;
     font-weight: bolder;
 }
+/*iconos del pie de página*/
+svg{
+    fill:black;
+}
+svg:hover{
+    background-color: cornsilk;
+}
+
+  
