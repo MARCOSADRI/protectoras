@@ -26,6 +26,9 @@
         {% if is_granted('ROLE_ADMIN') %}
         <hr>
         <li>
+          <a class="dropdown-item" href="{# {{ path('app_alta') }} #}">Alta Animal</a>
+        </li>
+        <li>
           <a class="dropdown-item" href="{# {{ path('app_adoptados') }} #}">Adoptados</a>
         </li>
         <li>
