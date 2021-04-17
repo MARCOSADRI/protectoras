@@ -1,6 +1,7 @@
 /*Estilo al Cuerpo para que se muestre correctamente con la cabecera*/
 body{
     margin-top: 4%;
+    margin-bottom: 4%;
 }
 /*Estilo para el botón de Cerrar Sesión*/
 .cerrar{
