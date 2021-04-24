@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Animales{% endblock %}
+
+{% block body %}
+    <h1>New Animales</h1>
+
+    {{ include('animales/_form.html.twig') }}
+
+    <a href="{{ path('animales_index') }}">Regresar Listado</a>
+{% endblock %}

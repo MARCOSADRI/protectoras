@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animales index{% endblock %}
+
+{% block body %}
+    <h1>Listado de Animales</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                {# <th>id</th> #}
+                <th>Especie</th>
+                <th>Raza</th>
+                <th>Tamaño</th>
+                <th>Sexo</th>
+                <th>Edad</th>
+                <th>Nombre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for animale in animales %}
+            <tr>
+                {# <td>{{ animale.id }}</td> #}
+                <td>{{ animale.especie }}</td>
+                <td>{{ animale.raza }}</td>
+                <td>{{ animale.tamano }}</td>
+                <td>{{ animale.sexo }}</td>
+                <td>{{ animale.edad }}</td>
+                <td>{{ animale.nombreA }}</td>
+                <td>
+                    <a href="{{ path('animales_show', {'id': animale.id}) }}">show</a>
+                    <a href="{{ path('animales_edit', {'id': animale.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('alta_animal') }}">Alta Nuevo Animal</a>
+{% endblock %}
