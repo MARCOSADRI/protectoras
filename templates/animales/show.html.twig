@@ -3,14 +3,14 @@
 {% block title %}Animales{% endblock %}
 
 {% block body %}
-    <h1>Animales</h1>
+    <h1>Ficha: {{ animale.nombreA }}</h1>
 
     <table class="table">
         <tbody>
-            <tr>
+            {# <tr>
                 <th>Id</th>
                 <td>{{ animale.id }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>Especie</th>
                 <td>{{ animale.especie }}</td>
@@ -24,23 +24,27 @@
                 <td>{{ animale.tamano }}</td>
             </tr>
             <tr>
-                <th>Edad</th>
-                <td>{{ animale.edad }}</td>
-            </tr>
-            <tr>
                 <th>Sexo</th>
                 <td>{{ animale.sexo }}</td>
             </tr>
             <tr>
-                <th>NombreA</th>
-                <td>{{ animale.nombreA }}</td>
+                <th>Edad</th>
+                <td>{{ animale.edad }}</td>
+            </tr>    
+            <tr>
+                <th>Esterilizado</th>
+                <td>{{ animale.ficha.esterilizado  ? 'Sí' : 'No' }}</td>
+            </tr>
+             <tr>
+                <th>Estado</th>
+                <td>{{ animale.ficha.estado ? 'Vivo' : 'Fallecido' }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('animales_index') }}">back to list</a>
 
-    <a href="{{ path('animales_edit', {'id': animale.id}) }}">edit</a>
+    <a href="{{ path('animales_edit', {'id': animale.id}) }}">Editar</a>
 
     {{ include('animales/_delete_form.html.twig') }}
 {% endblock %}

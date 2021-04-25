@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand navbar-dark bg-dark">
-  <img id="imgCabecera" src="../img/sonp.png" />
+  <img id="imgCabecera" src="../../img/sonp.png" />
   <a class="navbar-brand">
     <!-- Muestra mensaje de bienvenida o datos del usuario logeado -->
     {{ app.user ? "Usuario: " ~ app.user.username : "Bienvenid@: Debe logearse"}}
@@ -18,7 +18,7 @@
       <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nuestros
         Animales</a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <li><a class="dropdown-item" href="#">Todos para Adoptar</a></li>
+        <li><a class="dropdown-item" href="{{ path('animales_index') }}">Todos para Adoptar</a></li>
         <li><a class="dropdown-item" href="#">Perros para Adoptar</a></li>
         <li><a class="dropdown-item" href="#">Gatos para Adoptar</a></li>
         <li><a class="dropdown-item" href="#">Roedores y más para Adoptar</a></li>

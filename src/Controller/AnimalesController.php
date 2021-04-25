@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Ficha;
 use App\Entity\Animales;
 use App\Form\AnimalesType;
 use App\Repository\AnimalesRepository;
@@ -25,11 +26,18 @@ class AnimalesController extends AbstractController
     public function new(Request $request): Response
     {
         $animale = new Animales();
+        $ficha = new Ficha();
         $form = $this->createForm(AnimalesType::class, $animale);
+       /*  $form1 = $this->createForm(FichaType::class, $ficha); */
         $form->handleRequest($request); 
+        /* $form1->handleRequest($request);  */
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $ficha->setEstado(true);
+            $ficha->setEsterilizado(false);
+            $ficha->setAnimal($animale);
+            $entityManager->persist($ficha);
             $entityManager->persist($animale);
             $entityManager->flush();
 

@@ -3,18 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Animales;
-use Doctrine\ORM\EntityRepository;
-use Egulias\EmailValidator\Result\Reason\LabelTooLong;
-use PhpParser\Node\Stmt\Label;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use PhpParser\Builder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use function PHPSTORM_META\type;
 
 class AnimalesType extends AbstractType
 {
@@ -28,6 +23,7 @@ class AnimalesType extends AbstractType
                     'Roedores/Varios' => 'Otros',
                 )))
             ->add('raza')
+        
             ->add('tamano', ChoiceType::class,  array(
                 'choices'  => array(
                     'Pequeño' => 'Pequeño',
@@ -42,7 +38,7 @@ class AnimalesType extends AbstractType
             ->add('edad')
             ->add('nombreA',TextType::class,['label' => 'Nombre: '])
             /* ->add('Adoptador') */
-            ->add('ficha')/* AUTOMÁTICO */
+            /*  ->add('ficha', FichaType::class,['label' => 'FICHA: ']) */
             ;
     }
 

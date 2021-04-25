@@ -27,7 +27,7 @@ class Ficha
     /**
      * @ORM\Column(type="boolean")
      */
-    private $estado;
+    private $estado ;
 
     /**
      * @ORM\OneToOne(targetEntity=Animales::class, inversedBy="ficha", cascade={"persist", "remove"})
