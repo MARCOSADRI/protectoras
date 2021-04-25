@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/animales')]
 class AnimalesController extends AbstractController
 {
+/* Muestra Animales DISPONIBLES para ADOPTAR */
     #[Route('/', name: 'animales_disponibles', methods: ['GET'])]
     public function disponibles(AnimalesRepository $animalesRepository): Response
     {
@@ -21,7 +22,7 @@ class AnimalesController extends AbstractController
             'animales' => $animalesRepository->listadoSinAdoptar(),
         ]);
     }
-
+/* LISTA TODOS los Animales */
     #[Route('/listado', name: 'animales_listado', methods: ['GET'])]
     public function index(AnimalesRepository $animalesRepository): Response
     {
@@ -29,10 +30,11 @@ class AnimalesController extends AbstractController
             'animales' => $animalesRepository->findAll(),
         ]);
     }
-
+/*ALTA Nuevo Animal y Su Ficha */
     #[Route('/new', name: 'alta_animal', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $animale = new Animales();
     /*Nueva Ficha se creará simultaneamente con Animal */
         $ficha = new Ficha();
@@ -57,7 +59,7 @@ class AnimalesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+/*Muestra Detalle del Animal a Adoptar */
     #[Route('/{id}', name: 'animales_show', methods: ['GET'])]
     public function show(Animales $animale): Response
     {
@@ -65,7 +67,7 @@ class AnimalesController extends AbstractController
             'animale' => $animale,
         ]);
     }
-
+/*EDITA el Animal */
     #[Route('/{id}/edit', name: 'animales_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Animales $animale): Response
     {
@@ -83,16 +85,21 @@ class AnimalesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+/* FALLECIDO */
     #[Route('/{id}', name: 'animales_delete', methods: ['POST'])]
-    public function delete(Request $request, Animales $animale): Response
+    public function delete(Request $request, Animales $animale, Ficha $ficha): Response
     {
         if ($this->isCsrfTokenValid('delete'.$animale->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($animale);
+            /* $entityManager->remove($animale); */
+                $animale->getFicha()->setEstado(false);
+                $entityManager->flush();
+
+
+
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('animales_index');
+        return $this->redirectToRoute('animales_listado');
     }
 }

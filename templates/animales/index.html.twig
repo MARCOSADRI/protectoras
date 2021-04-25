@@ -30,7 +30,9 @@
                 <td>{{ animale.nombreA }}</td>
                 <td>
                     <a href="{{ path('animales_show', {'id': animale.id}) }}">show</a>
+                {% if is_granted('ROLE_ADMIN')  %}    
                     <a href="{{ path('animales_edit', {'id': animale.id}) }}">edit</a>
+                {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -41,5 +43,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('alta_animal') }}">Alta Nuevo Animal</a>
+    {% if is_granted('ROLE_ADMIN')  %}
+        <a href="{{ path('alta_animal') }}">Alta Nuevo Animal</a>
+    {% endif %}
+
+    
 {% endblock %}
