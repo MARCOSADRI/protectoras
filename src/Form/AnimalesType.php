@@ -3,10 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Animales;
-use PhpParser\Builder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +21,6 @@ class AnimalesType extends AbstractType
                     'Roedores/Varios' => 'Otros',
                 )))
             ->add('raza')
-        
             ->add('tamano', ChoiceType::class,  array(
                 'choices'  => array(
                     'Pequeño' => 'Pequeño',

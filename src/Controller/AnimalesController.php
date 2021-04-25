@@ -14,7 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/animales')]
 class AnimalesController extends AbstractController
 {
-    #[Route('/', name: 'animales_index', methods: ['GET'])]
+    #[Route('/', name: 'animales_disponibles', methods: ['GET'])]
+    public function disponibles(AnimalesRepository $animalesRepository): Response
+    {
+        return $this->render('animales/index.html.twig', [
+            'animales' => $animalesRepository->listadoSinAdoptar(),
+        ]);
+    }
+
+    #[Route('/listado', name: 'animales_listado', methods: ['GET'])]
     public function index(AnimalesRepository $animalesRepository): Response
     {
         return $this->render('animales/index.html.twig', [
@@ -26,14 +34,14 @@ class AnimalesController extends AbstractController
     public function new(Request $request): Response
     {
         $animale = new Animales();
+    /*Nueva Ficha se creará simultaneamente con Animal */
         $ficha = new Ficha();
         $form = $this->createForm(AnimalesType::class, $animale);
-       /*  $form1 = $this->createForm(FichaType::class, $ficha); */
         $form->handleRequest($request); 
-        /* $form1->handleRequest($request);  */
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+    /* Inicializa/Crea la Ficha con Datos Predeterminados */
             $ficha->setEstado(true);
             $ficha->setEsterilizado(false);
             $ficha->setAnimal($animale);
@@ -75,7 +83,7 @@ class AnimalesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    
     #[Route('/{id}', name: 'animales_delete', methods: ['POST'])]
     public function delete(Request $request, Animales $animale): Response
     {

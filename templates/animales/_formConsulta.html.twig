@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animales index{% endblock %}
+
+{% block body %}
+    <h1>Formulario Consultas Animales:</h1>
+
+    <select class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
+
+    <a href="{{ path('alta_animal') }}">Alta Nuevo Animal</a>
+{% endblock %}

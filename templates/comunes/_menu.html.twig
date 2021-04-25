@@ -18,8 +18,8 @@
       <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nuestros
         Animales</a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <li><a class="dropdown-item" href="{{ path('animales_index') }}">Todos para Adoptar</a></li>
-        <li><a class="dropdown-item" href="#">Perros para Adoptar</a></li>
+        <li><a class="dropdown-item" href="{{ path('animales_disponibles') }}">Todos para Adoptar</a></li>
+        <li><a class="dropdown-item" href="{# {{ path('_formConsulta') }} #}">FILTRAR</a></li>
         <li><a class="dropdown-item" href="#">Gatos para Adoptar</a></li>
         <li><a class="dropdown-item" href="#">Roedores y más para Adoptar</a></li>
         <!-- El Administrador tendrá las Opciones de Listar Todos los Animales o sólo los Adoptados-->
@@ -32,7 +32,7 @@
           <a class="dropdown-item" href="{# {{ path('app_adoptados') }} #}">Adoptados</a>
         </li>
         <li>
-          <a class="dropdown-item" href="{# {{ path('app_listadoCompleto') }} #}">Todos los Animales</a>
+          <a class="dropdown-item" href="{{ path('animales_listado') }}">Todos los Animales</a>
         </li>
         {% endif %}
       </ul>
