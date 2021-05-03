@@ -1,4 +1,0 @@
-<form method="post" action="{{ path('animales_delete', {'id': animale.id}) }}" onsubmit="return confirm('El animal {{animale.nombreA}} ha fallecido?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ animale.id) }}">
-    <button class="btn btn-secondary"><b>Fallecido</b></button>
-</form>

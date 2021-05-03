@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ficha{% endblock %}
+{% block title %}Fichas{% endblock %}
 
 {% block body %}
-    <h1>Ficha</h1>
+    <h1>Fichas</h1>
 
     <table class="table">
         <tbody>
@@ -16,15 +16,15 @@
                 <td>{{ ficha.esterilizado ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>Estado</th>
-                <td>{{ ficha.estado ? 'Yes' : 'No' }}</td>
+                <th>Fallecido</th>
+                <td>{{ ficha.fallecido ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('ficha_index') }}">back to list</a>
+    <a href="{{ path('fichas_index') }}">back to list</a>
 
-    <a href="{{ path('ficha_edit', {'id': ficha.id}) }}">edit</a>
+    <a href="{{ path('fichas_edit', {'id': ficha.id}) }}">edit</a>
 
-    {{ include('ficha/_delete_form.html.twig') }}
+    {{ include('fichas/_delete_form.html.twig') }}
 {% endblock %}

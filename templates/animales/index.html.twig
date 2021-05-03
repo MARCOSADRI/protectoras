@@ -3,41 +3,37 @@
 {% block title %}Animales index{% endblock %}
 
 {% block body %}
-    <h1>Listado de Animales</h1>
+    <h1>Animales index</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>id_Se Quita</th>
-                <th>Especie</th>
-                <th>Raza</th>
-                <th>Tamaño</th>
+                <th>Id...Eliminar</th>
+                <th>Foto</th>
+                <th>NombreA</th>
                 <th>Sexo</th>
                 <th>Edad</th>
-                <th>Nombre</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for animale in animales %}
             <tr>
-                <td>{{ animale.id }}</td>
-                <td>{{ animale.especie }}</td>
-                <td>{{ animale.raza }}</td>
-                <td>{{ animale.tamano }}</td>
+                <td>{{ animale.id }} </td>
+                <td><img id="imgCabecera" src="{{ animale.foto }}" /> </td>
+                <td>{{ animale.nombreA }}</td>
                 <td>{{ animale.sexo }}</td>
                 <td>{{ animale.edad }}</td>
-                <td>{{ animale.nombreA }}</td>
                 <td>
-                    <a href="{{ path('animales_show', {'id': animale.id}) }}">show</a>
-                {% if is_granted('ROLE_ADMIN')  %}    
-                    <a href="{{ path('animales_edit', {'id': animale.id}) }}">edit</a>
-                {% endif %}
+                    <a href="{{ path('animales_show', {'id': animale.id}) }}">Detalle</a>
+                    {% if is_granted('ROLE_ADMIN')  %}    
+                        <a href="{{ path('animales_edit', {'id': animale.id}) }}">Editar</a>
+                    {% endif %} 
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="6">No hay Animales Disponibles <b> Disculpen las Molestias</b></td>
             </tr>
         {% endfor %}
         </tbody>
@@ -46,6 +42,4 @@
     {% if is_granted('ROLE_ADMIN')  %}
         <a href="{{ path('alta_animal') }}">Alta Nuevo Animal</a>
     {% endif %}
-
-    
 {% endblock %}

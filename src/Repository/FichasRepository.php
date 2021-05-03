@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Ficha;
+use App\Entity\Fichas;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Ficha|null find($id, $lockMode = null, $lockVersion = null)
- * @method Ficha|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ficha[]    findAll()
- * @method Ficha[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Fichas|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Fichas|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Fichas[]    findAll()
+ * @method Fichas[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FichaRepository extends ServiceEntityRepository
+class FichasRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Ficha::class);
+        parent::__construct($registry, Fichas::class);
     }
 
     // /**
-    //  * @return Ficha[] Returns an array of Ficha objects
+    //  * @return Fichas[] Returns an array of Fichas objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class FichaRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Ficha
+    public function findOneBySomeField($value): ?Fichas
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.exampleField = :val')

@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\FichaRepository;
+use App\Repository\FichasRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=FichaRepository::class)
+ * @ORM\Entity(repositoryClass=FichasRepository::class)
  */
-class Ficha
+class Fichas
 {
     /**
      * @ORM\Id
@@ -27,28 +27,27 @@ class Ficha
     /**
      * @ORM\Column(type="boolean")
      */
-    private $estado ;
+    private $fallecido;
 
     /**
-     * @ORM\OneToOne(targetEntity=Animales::class, inversedBy="ficha", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $animal;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Revisiones::class, mappedBy="ficha")
+     * @ORM\OneToMany(targetEntity=Revisiones::class, mappedBy="ficha", orphanRemoval=true)
      */
     private $revisiones;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vacunas::class, mappedBy="ficha")
+     * @ORM\OneToMany(targetEntity=Vacunas::class, mappedBy="ficha", orphanRemoval=true)
      */
     private $vacunas;
 
     /**
-     * @ORM\OneToMany(targetEntity=Enfermedad::class, mappedBy="ficha")
+     * @ORM\OneToMany(targetEntity=Enfermedades::class, mappedBy="ficha", orphanRemoval=true)
      */
     private $enfermedades;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Animales::class, mappedBy="ficha", cascade={"persist", "remove"})
+     */
+    private $animales;
 
     public function __construct()
     {
@@ -74,26 +73,14 @@ class Ficha
         return $this;
     }
 
-    public function getEstado(): ?bool
+    public function getFallecido(): ?bool
     {
-        return $this->estado;
+        return $this->fallecido;
     }
 
-    public function setEstado(bool $estado): self
+    public function setFallecido(bool $fallecido): self
     {
-        $this->estado = $estado;
-
-        return $this;
-    }
-
-    public function getAnimal(): ?Animales
-    {
-        return $this->animal;
-    }
-
-    public function setAnimal(Animales $animal): self
-    {
-        $this->animal = $animal;
+        $this->fallecido = $fallecido;
 
         return $this;
     }
@@ -159,31 +146,48 @@ class Ficha
     }
 
     /**
-     * @return Collection|Enfermedad[]
+     * @return Collection|Enfermedades[]
      */
-    public function getenfermedades(): Collection
+    public function getEnfermedades(): Collection
     {
         return $this->enfermedades;
     }
 
-    public function addEnfermedad(Enfermedad $enfermedad): self
+    public function addEnfermedade(Enfermedades $enfermedade): self
     {
-        if (!$this->enfermedades->contains($enfermedad)) {
-            $this->enfermedades[] = $enfermedad;
-            $enfermedad->setFicha($this);
+        if (!$this->enfermedades->contains($enfermedade)) {
+            $this->enfermedades[] = $enfermedade;
+            $enfermedade->setFicha($this);
         }
 
         return $this;
     }
 
-    public function removeEnfermedad(Enfermedad $enfermedad): self
+    public function removeEnfermedade(Enfermedades $enfermedade): self
     {
-        if ($this->enfermedades->removeElement($enfermedad)) {
+        if ($this->enfermedades->removeElement($enfermedade)) {
             // set the owning side to null (unless already changed)
-            if ($enfermedad->getFicha() === $this) {
-                $enfermedad->setFicha(null);
+            if ($enfermedade->getFicha() === $this) {
+                $enfermedade->setFicha(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAnimales(): ?Animales
+    {
+        return $this->animales;
+    }
+
+    public function setAnimales(Animales $animales): self
+    {
+        // set the owning side of the relation if necessary
+        if ($animales->getFicha() !== $this) {
+            $animales->setFicha($this);
+        }
+
+        $this->animales = $animales;
 
         return $this;
     }

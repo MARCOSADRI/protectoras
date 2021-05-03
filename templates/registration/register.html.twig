@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Registro{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block body %}
-    {# {% for flashError in app.flashes('verify_email_error') %}
+   {#  {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %} #}
 
@@ -14,8 +14,11 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-       {#  {{ form_row(registrationForm.agreeTerms) }} #}
+        {# {{ form_row(registrationForm.agreeTerms) }} #}
 
-        <button type="submit" class="btn btn-primary">Registro</button>
+        <button type="submit" class="btn btn-success">Registro</button>
     {{ form_end(registrationForm) }}
+    {% block javascripts %}
+        <script src="{{ asset('js/registro.js') }}" type="text/javascript">
+    {% endblock %}
 {% endblock %}

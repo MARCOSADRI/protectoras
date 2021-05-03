@@ -18,6 +18,12 @@ class Revisiones
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Fichas::class, inversedBy="revisiones")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ficha;
+
+    /**
      * @ORM\Column(type="date")
      */
     private $fecha;
@@ -27,14 +33,21 @@ class Revisiones
      */
     private $diagnostico;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Ficha::class, inversedBy="revisiones")
-     */
-    private $ficha;
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFicha(): ?Fichas
+    {
+        return $this->ficha;
+    }
+
+    public function setFicha(?Fichas $ficha): self
+    {
+        $this->ficha = $ficha;
+
+        return $this;
     }
 
     public function getFecha(): ?\DateTimeInterface
@@ -57,18 +70,6 @@ class Revisiones
     public function setDiagnostico(string $diagnostico): self
     {
         $this->diagnostico = $diagnostico;
-
-        return $this;
-    }
-
-    public function getFicha(): ?Ficha
-    {
-        return $this->ficha;
-    }
-
-    public function setFicha(?Ficha $ficha): self
-    {
-        $this->ficha = $ficha;
 
         return $this;
     }

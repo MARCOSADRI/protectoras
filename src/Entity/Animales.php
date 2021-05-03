@@ -18,19 +18,27 @@ class Animales
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\ManyToOne(targetEntity=Especies::class, inversedBy="animales")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $especie;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\ManyToOne(targetEntity=Razas::class, inversedBy="animales")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $raza;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\ManyToOne(targetEntity=Tamanos::class, inversedBy="animales")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $tamano;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $sexo;
 
     /**
      * @ORM\Column(type="integer")
@@ -38,74 +46,64 @@ class Animales
     private $edad;
 
     /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $sexo;
-
-    /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=50)
      */
     private $nombreA;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="animales")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Adoptador;
+    private $foto;
 
     /**
-     * @ORM\OneToOne(targetEntity=Ficha::class, mappedBy="animal", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Fichas::class, inversedBy="animales", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     
      */
     private $ficha;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="animales")
+     */
+    private $adoptador;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEspecie(): ?string
+    public function getEspecie(): ?Especies
     {
         return $this->especie;
     }
 
-    public function setEspecie(string $especie): self
+    public function setEspecie(?Especies $especie): self
     {
         $this->especie = $especie;
 
         return $this;
     }
 
-    public function getRaza(): ?string
+    public function getRaza(): ?Razas
     {
         return $this->raza;
     }
 
-    public function setRaza(string $raza): self
+    public function setRaza(?Razas $raza): self
     {
         $this->raza = $raza;
 
         return $this;
     }
 
-    public function getTamano(): ?string
+    public function getTamano(): ?Tamanos
     {
         return $this->tamano;
     }
 
-    public function setTamano(string $tamano): self
+    public function setTamano(?Tamanos $tamano): self
     {
         $this->tamano = $tamano;
-
-        return $this;
-    }
-
-    public function getEdad(): ?int
-    {
-        return $this->edad;
-    }
-
-    public function setEdad(int $edad): self
-    {
-        $this->edad = $edad;
 
         return $this;
     }
@@ -122,6 +120,18 @@ class Animales
         return $this;
     }
 
+    public function getEdad(): ?int
+    {
+        return $this->edad;
+    }
+
+    public function setEdad(int $edad): self
+    {
+        $this->edad = $edad;
+
+        return $this;
+    }
+
     public function getNombreA(): ?string
     {
         return $this->nombreA;
@@ -134,31 +144,38 @@ class Animales
         return $this;
     }
 
-    public function getAdoptador(): ?User
+    public function getFoto(): ?string
     {
-        return $this->Adoptador;
+        return $this->foto;
     }
 
-    public function setAdoptador(?User $Adoptador): self
+    public function setFoto(?string $foto): self
     {
-        $this->Adoptador = $Adoptador;
+        $this->foto = $foto;
 
         return $this;
     }
 
-    public function getFicha(): ?Ficha
+    public function getFicha(): ?Fichas
     {
         return $this->ficha;
     }
 
-    public function setFicha(Ficha $ficha): self
+    public function setFicha(Fichas $ficha): self
     {
-        // set the owning side of the relation if necessary
-        if ($ficha->getAnimal() !== $this) {
-            $ficha->setAnimal($this);
-        }
-
         $this->ficha = $ficha;
+
+        return $this;
+    }
+
+    public function getAdoptador(): ?User
+    {
+        return $this->adoptador;
+    }
+
+    public function setAdoptador(?User $adoptador): self
+    {
+        $this->adoptador = $adoptador;
 
         return $this;
     }

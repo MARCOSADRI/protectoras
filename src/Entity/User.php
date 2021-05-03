@@ -9,10 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/*Mensaje en Caso de que ya haya un usuario registrado con el mismo nombre*/
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"username"}, message="Ya existe una Cuenta con ese Nombre de Usuario")
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface
 {
@@ -40,7 +39,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Animales::class, mappedBy="Adoptador")
+     * @ORM\OneToMany(targetEntity=Animales::class, mappedBy="adoptador")
      */
     private $animales;
 

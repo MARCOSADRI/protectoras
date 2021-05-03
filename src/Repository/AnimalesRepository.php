@@ -18,22 +18,6 @@ class AnimalesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Animales::class);
     }
-    /**
-    * @return Animales[] Returns an array of Animales objects
-    */
-    public function listadoSinAdoptar()
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.Adoptador IS NULL')
-        /*JOIN para ver Animales VIVOS */
-            ->join('a.ficha','f')
-            ->where('f.estado = true')
-           /*->setParameter('val', $value) */
-            ->orderBy('a.especie', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
 
     // /**
     //  * @return Animales[] Returns an array of Animales objects

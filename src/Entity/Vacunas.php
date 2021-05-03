@@ -18,28 +18,41 @@ class Vacunas
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\ManyToOne(targetEntity=Fichas::class, inversedBy="vacunas")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ficha;
+
+    /**
+     * @ORM\Column(type="string", length=50)
      */
     private $nombreV;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=50)
      */
-    private $Previene;
+    private $previene;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=50)
      */
-    private $Fabricante;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Ficha::class, inversedBy="vacunas")
-     */
-    private $ficha;
+    private $fabricante;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFicha(): ?Fichas
+    {
+        return $this->ficha;
+    }
+
+    public function setFicha(?Fichas $ficha): self
+    {
+        $this->ficha = $ficha;
+
+        return $this;
     }
 
     public function getNombreV(): ?string
@@ -56,36 +69,24 @@ class Vacunas
 
     public function getPreviene(): ?string
     {
-        return $this->Previene;
+        return $this->previene;
     }
 
-    public function setPreviene(string $Previene): self
+    public function setPreviene(string $previene): self
     {
-        $this->Previene = $Previene;
+        $this->previene = $previene;
 
         return $this;
     }
 
     public function getFabricante(): ?string
     {
-        return $this->Fabricante;
+        return $this->fabricante;
     }
 
-    public function setFabricante(string $Fabricante): self
+    public function setFabricante(string $fabricante): self
     {
-        $this->Fabricante = $Fabricante;
-
-        return $this;
-    }
-
-    public function getFicha(): ?Ficha
-    {
-        return $this->ficha;
-    }
-
-    public function setFicha(?Ficha $ficha): self
-    {
-        $this->ficha = $ficha;
+        $this->fabricante = $fabricante;
 
         return $this;
     }

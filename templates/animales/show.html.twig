@@ -3,25 +3,13 @@
 {% block title %}Animales{% endblock %}
 
 {% block body %}
-    <h1>Ficha: <b>{{ animale.nombreA }}</b></h1>
+    <h1>Animales</h1>
 
-    <table class="table mt-4">
+    <table class="table">
         <tbody>
-             <tr>
-                <th>Id /Se quita</th>
+            <tr>
+                <th>Id</th>
                 <td>{{ animale.id }}</td>
-            </tr>
-            <tr>
-                <th>Especie</th>
-                <td>{{ animale.especie }}</td>
-            </tr>
-            <tr>
-                <th>Raza</th>
-                <td>{{ animale.raza }}</td>
-            </tr>
-            <tr>
-                <th>Tamano</th>
-                <td>{{ animale.tamano }}</td>
             </tr>
             <tr>
                 <th>Sexo</th>
@@ -30,37 +18,21 @@
             <tr>
                 <th>Edad</th>
                 <td>{{ animale.edad }}</td>
-            </tr>    
-            <tr>
-                <th>Esterilizado</th>
-                <td>{{ animale.ficha.esterilizado  ? 'Sí' : 'No' }}</td>
-            </tr>
-             <tr>
-                <th>Estado</th>
-                <td>{{ animale.ficha.estado ? 'Vivo' : 'Fallecido' }}</td>
             </tr>
             <tr>
-            {% if is_granted('ROLE_ADMIN') %}
-                <th class='text-center bg-warning'>
-                    <a href="{{ path('animales_edit', {'id': animale.id}) }}">Editar</a>
-                </th>
-                <th class='text-center bg-danger'>
-                    {{ include('animales/_baja.html.twig') }}
-                </th>
-            <tr>       
-                <th colspan="2"class='text-center bg-light'>
-                    <a href="{{ path('animales_listado')}}">Listado General</a>
-                </th>
+                <th>NombreA</th>
+                <td>{{ animale.nombreA }}</td>
             </tr>
-            {% else %}
-                <th class='text-center bg-warning'><a href="{# {{ path('') }} #}">ADOPTAR</a>
-                </th>
-                <th class='text-center bg-light'>                                        
-                    <a href="{{ path('animales_disponibles') }}">Regresar a Disponibles</a>
-                </th> 
-            {% endif %}
+            <tr>
+                <th>Foto</th>
+                <td>{{ animale.foto }}</td>
             </tr>
         </tbody>
     </table>
 
+    <a href="{{ path('animales_listado') }}">Regresar Listado</a>
+
+    <a href="{{ path('animales_edit', {'id': animale.id}) }}">Editar</a>
+
+    {{ include('animales/_delete_form.html.twig') }}
 {% endblock %}

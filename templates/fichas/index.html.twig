@@ -1,29 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ficha index{% endblock %}
+{% block title %}Fichas index{% endblock %}
 
 {% block body %}
-    <h1>Ficha index</h1>
+    <h1>Fichas index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Esterilizado</th>
-                <th>Estado</th>
+                <th>Fallecido</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for ficha in fichas %}
             <tr>
-                <td>{{ ficha.animal.nombreA}}</td>
-                {# <td>{{ ficha.id }}</td> #}
+                <td>{{ ficha.id }}</td>
                 <td>{{ ficha.esterilizado ? 'Yes' : 'No' }}</td>
-                <td>{{ ficha.estado ? 'Vivo' : 'Fallecido' }}</td>
+                <td>{{ ficha.fallecido ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('ficha_show', {'id': ficha.id}) }}">show</a>
-                    <a href="{{ path('ficha_edit', {'id': ficha.id}) }}">edit</a>
+                    <a href="{{ path('fichas_show', {'id': ficha.id}) }}">show</a>
+                    <a href="{{ path('fichas_edit', {'id': ficha.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -34,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{# {{ path('ficha_new') }} #}">Create new</a>
+    <a href="{{ path('fichas_new') }}">Create new</a>
 {% endblock %}
