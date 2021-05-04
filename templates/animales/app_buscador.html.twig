@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Animales Buscador{% endblock %}
+{% block title %}Animales index{% endblock %}
 
 {% block body %}
-    <h1>Buscador Animales</h1>
+    <h1>Animales index</h1>
 
     <table class="table">
         <thead>
@@ -17,10 +17,10 @@
             </tr>
         </thead>
         <tbody>
-        {% for animale in animales %}
+        {# {% for a in especie %}
             <tr>
-                <td>{{ animale.id }} </td>
-                <td><img id="imgCabecera" src="../../img/{{ animale.foto }}" /> </td>
+                <td>{{ a }} </td>
+                {# <td><img id="imgCabecera" src="../../img/{{ animale.foto }}" /> </td>
                 <td>{{ animale.nombreA }}</td>
                 <td>{{ animale.sexo }}</td>
                 <td>{{ animale.edad }}</td>
@@ -29,13 +29,13 @@
                     {% if is_granted('ROLE_ADMIN')  %}    
                         <a href="{{ path('animales_edit', {'id': animale.id}) }}">Editar</a>
                     {% endif %} 
-                </td>
+                </td> 
             </tr>
         {% else %}
             <tr>
                 <td colspan="6">No hay Animales Disponibles <b> Disculpen las Molestias</b></td>
             </tr>
-        {% endfor %}
+        {% endfor %} #}
         </tbody>
     </table>
 

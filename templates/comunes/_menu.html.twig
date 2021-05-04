@@ -19,7 +19,20 @@
         Animales</a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         <li><a class="dropdown-item" href="{{ path('animales_disponibles') }}">Todos para Adoptar</a></li>
-        <li><a class="dropdown-item" href="{# {{ path('_formConsulta') }} #}">FILTRAR</a></li>
+        <li><a class="dropdown-item" {# id="filtro" #} href="{{ path('app_buscador') }}">FILTRAR</a></li>
+
+
+<div id="dialog" title="Busca Tú Peludo">
+    <form>
+        <p>Especie<input type="select" id="especie" placeholder='Indica la Especie'></p>
+        <p>Raza<input type="select" id="raza" placeholder='Inserta la Raza'></p>
+        <p>Tamaño<input type="select" id="tamano" placeholder='Indica Tamaño'></p>
+        <p>Sexo<input type="select" id="sexo" placeholder='Inserta Sexo'></p>
+        <p>Edad<input type="select" id="edad" placeholder='Indica Edad'></p>
+    </form>
+</div>
+
+
         <li><a class="dropdown-item" href="#">Gatos para Adoptar</a></li>
         <li><a class="dropdown-item" href="#">Roedores y más para Adoptar</a></li>
         <!-- El Administrador tendrá las Opciones de Listar Todos los Animales o sólo los Adoptados-->
@@ -68,7 +81,22 @@
   </ul>
 </nav>
 <script>
-  $(function () {
-
-  });
-</script>
+        $(function () {
+            $('#filtro').click(function (e) {
+                e.preventDefault();
+                $('#dialog').dialog('open');
+            });
+            $('#dialog').dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    'Añadir': function () {
+                      alert('Enviar Datos')
+                    },
+                    'Cancel': function () {
+                        $(this).dialog('close');
+                    }
+                }
+            })
+        });
+    </script>

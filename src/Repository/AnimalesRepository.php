@@ -19,6 +19,10 @@ class AnimalesRepository extends ServiceEntityRepository
         parent::__construct($registry, Animales::class);
     }
 
+
+    
+
+
     // /**
     //  * @return Animales[] Returns an array of Animales objects
     //  */

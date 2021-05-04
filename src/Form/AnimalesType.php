@@ -42,6 +42,15 @@ class AnimalesType extends AbstractType
                     'Hembra' => 'Hembra'
                 )))
             ->add('edad')
+           /*  ->add('foto', FileType::class,
+                ['label' => 'Seleccione una imagen',
+                'required' => false]
+            ) */
+            ->add('foto', FileType::class,array(
+                "label" => "FOTO:",
+                "attr" =>array("class" => "form-control"),
+                "data_class" => null
+            ))
         ;
     }
 
