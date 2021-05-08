@@ -38,6 +38,7 @@ class AnimalesType extends AbstractType
             ->add('nombreA', TextType::class,['label' => 'Nombre: '])
             ->add('sexo', ChoiceType::class,  array(
                 'choices'  => array(
+                    ' ' => '*',
                     'Macho' => 'Macho',
                     'Hembra' => 'Hembra'
                 )))
