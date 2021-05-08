@@ -56,7 +56,7 @@ class AnimalesController extends AbstractController
             $animale->setFoto($file_name);
             $entityManager = $this->getDoctrine()->getManager();
         /* Inicializa/Crea la Ficha con Datos Predeterminados */
-            $ficha->setFallecido(false);
+            $ficha->setFallecido(false);/* ---------------- SE ELIMINARÁ --------- */
             $ficha->setEsterilizado(false);
             $entityManager->persist($ficha);
             $animale->setFicha($ficha);
@@ -107,14 +107,14 @@ class AnimalesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-/* FALLECIDO */
+/* Eliminar el Animal */
     #[Route('/{id}', name: 'animales_delete', methods: ['POST'])]
     public function delete(Request $request, Animales $animale): Response
     {
         if ($this->isCsrfTokenValid('delete'.$animale->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-             /* $entityManager->remove($animale); */
-             $animale->getFicha()->setFallecido(true);
+            $entityManager->remove($animale);
+            /* $animale->getFicha()->setFallecido(true); */
             $entityManager->flush();
         }
 
@@ -122,7 +122,7 @@ class AnimalesController extends AbstractController
     }
 
 
-    #[Route('/buscador', name: 'app_buscador')]
+    #[Route('/{id}', name: 'animales_adoptar', methods: ['POST'])]
     public function buscarAnimales(AnimalesRepository $animalesRepository): Response
     {
         return $this->render('animales/app_buscador.html.twig', [

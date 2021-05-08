@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('animales_adoptar', {'id': animale.id}) }}" 
+onsubmit="return confirm('Seguro que desea Eliminar el Animal ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('adoptar' ~ animale.id) }}">
+    <button class="btn btn-success">Adoptar</button>
+</form>

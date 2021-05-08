@@ -1,4 +1,12 @@
-{{ form_start(form) }}
+  <div class="col col-3 offset-4 border border-primary rounded p-4 bg-light fw-bolder">
+        {{ form_start(form) }}
+            <p>{{ form_widget(form) }}</p>
+            <button class="btn btn-success">{{ button_label|default('Guardar') }}</button>
+        {{ form_end(form) }}
+    </div>
+
+{# {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn btn-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+ #}

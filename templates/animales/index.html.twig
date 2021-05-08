@@ -10,7 +10,7 @@
             <tr>
                 <th>Id...Eliminar</th>
                 <th>Foto</th>
-                <th>NombreA</th>
+                <th>Nombre Animal</th>
                 <th>Sexo</th>
                 <th>Edad</th>
                 <th>actions</th>
@@ -20,7 +20,9 @@
         {% for animale in animales %}
             <tr>
                 <td>{{ animale.id }} </td>
-                <td><img id="imgCabecera" src="../../img/{{ animale.foto }}" /> </td>
+                <td>
+                    <img id="imgCabecera" src="../../img/{{ animale.foto }}" />
+                </td>
                 <td>{{ animale.nombreA }}</td>
                 <td>{{ animale.sexo }}</td>
                 <td>{{ animale.edad }}</td>

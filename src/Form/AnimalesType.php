@@ -18,8 +18,8 @@ class AnimalesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $option)
     {
-        
         $builder
+       
              ->add('especie', EntityType::class, array(
                 'required' => true,
                 'placeholder' => 'Selecciona Una Especie..',
@@ -37,8 +37,8 @@ class AnimalesType extends AbstractType
             ))
             ->add('nombreA', TextType::class,['label' => 'Nombre: '])
             ->add('sexo', ChoiceType::class,  array(
+                "placeholder" => "Selecciona Sexo:",
                 'choices'  => array(
-                    ' ' => '*',
                     'Macho' => 'Macho',
                     'Hembra' => 'Hembra'
                 )))
