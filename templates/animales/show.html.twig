@@ -3,7 +3,7 @@
 {% block title %}Animales{% endblock %}
 
 {% block body %}
-    <h1>{{ animale.nombreA }}</h1>
+    <h1>Nombre: <b>{{ animale.nombreA }}</b></h1>
 
     <table class="table">
         <tbody>
@@ -12,12 +12,24 @@
                 <td>{{ animale.id }}</td>
             </tr>
             <tr>
+                <th>Especie</th>
+                <td>{{ animale.especie }}</td>
+            </tr>
+            <tr>
+                <th>Raza</th>
+                <td>{{ animale.raza }}</td>
+            </tr>
+            <tr>
                 <th>Sexo</th>
                 <td>{{ animale.sexo }}</td>
             </tr>
             <tr>
                 <th>Edad</th>
                 <td>{{ animale.edad }}</td>
+            </tr>
+            <tr>
+                <th>Tamaño</th>
+                <td>{{ animale.tamano }}</td>
             </tr>
             {# <tr>
                 <th>Nombre:</th>
@@ -44,7 +56,9 @@
         <button  class="btn btn-outline-warning">
             <a href="{{ path('animales_disponibles') }}">Regresar Listado</a>   
         </button> 
-        <button class='btn-info'>ADOPTAR</button>
+        
+        {{ include('animales/_adoptar_form.html.twig') }}
+      
     {% endif %} 
 
     

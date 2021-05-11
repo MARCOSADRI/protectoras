@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-        {# {% for a in especie %}
+        {% for a in animales %}
             <tr>
                 <td>{{ a }} </td>
                 {# <td><img id="imgCabecera" src="../../img/{{ animale.foto }}" /> </td>
@@ -34,8 +34,11 @@
         {% else %}
             <tr>
                 <td colspan="6">No hay Animales Disponibles <b> Disculpen las Molestias</b></td>
-            </tr>
-        {% endfor %} #}
+            </tr>#}
+        {% endfor %}
+        {# {{form_start(form)}}
+            {{form_row(form.nombreA)}}
+        {{form_end(form)}} #}
         </tbody>
     </table>
 

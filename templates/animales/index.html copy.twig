@@ -5,10 +5,6 @@
 {% block body %}
     <h1>Buscador Animales</h1>
 
-    <input type="text" id='formulario' class='form-control'>
-    <button class='btn btn-info mb-2' id='boton'>Buscar</button>
-
-
     <table class="table">
         <thead>
             <tr>
@@ -28,7 +24,7 @@
                     <img id="imgCabecera" src="../../img/{{ animale.foto }}" />
                 </td>
                 <td>{{ animale.nombreA }}</td>
-                <td id='sexo'>{{ animale.sexo }}</td>
+                <td>{{ animale.sexo }}</td>
                 <td>{{ animale.edad }}</td>
                 <td>
                     <a href="{{ path('animales_show', {'id': animale.id}) }}">Detalle</a>
@@ -48,28 +44,4 @@
     {% if is_granted('ROLE_ADMIN')  %}
         <a href="{{ path('alta_animal') }}">Alta Nuevo Animal</a>
     {% endif %}
-    <script>
-        const formulario =document.querySelector('#formulario');
-        const boton =document.querySelector('#boton');
-        const resultado = document.querySelector('#resultado');
-        const anim =document.querySelectorAll('tbody td')
-
-        const filtrar=()=>{
-            console.log (formulario.value);
-            const texto=formulario.value;
-            for(let a of anim){
-                if(a.indexOf(texto) !== -1){
-                    console.log(especie)
-                    resultado.innerHTML +=`<li>${especie}<li>`;
-                }
-            }
-               
-             
-     
-           if (resultado.innerHTML ===' '){
-                resultado.innerHTML +=`<li>NO HAY<li>`;
-            }
-        }
-        boton.addEventListener('click',filtrar);
-    </script>
 {% endblock %}

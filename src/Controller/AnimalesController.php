@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Fichas;
 use App\Entity\Animales;
+use App\Entity\User;
 use App\Form\AnimalesType;
 use App\Repository\AnimalesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,12 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/animales')]
 class AnimalesController extends AbstractController
 {
+/* LISTAR ANIMALES SIN ADOPTAR */
     #[Route('/', name: 'animales_disponibles', methods: ['GET'])]
     public function index(AnimalesRepository $animalesRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('animales/index.html.twig', [
-            'animales' => $animalesRepository->findAll(),/* SIN ADOPTAR */
+            'animales' => $animalesRepository->findByDisponible(),
         ]);
     }
 
@@ -27,6 +29,7 @@ class AnimalesController extends AbstractController
     #[Route('/listado', name: 'animales_listado', methods: ['GET'])]
     public function listado(AnimalesRepository $animalesRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return $this->render('animales/index.html.twig', [
             'animales' => $animalesRepository->findAll(),
         ]);
@@ -71,7 +74,7 @@ class AnimalesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-/*Muestra Detalle del Animal a Adoptar */
+/*Muestra Detalle del Animal */
     #[Route('/{id}', name: 'animales_show', methods: ['GET'])]
     public function show(Animales $animale): Response
     {
@@ -87,26 +90,45 @@ class AnimalesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Recogemos el fichero de la Foto
+        // Recogemos el fichero de la Foto
             $file=$form['foto']->getData();
-            // Sacamos la extensión del fichero
+        // Sacamos la extensión del fichero
             $ext=$file->guessExtension();   
-            // Le ponemos un nombre al fichero
+        // Le ponemos un nombre al fichero
             $file_name=time().".".$ext;  
-            // Guardamos el fichero en el directorio img que estará en el directorio /public del framework
+        // Guardamos el fichero en el directorio img que estará en el directorio /public del framework
             $file->move("img", $file_name);
-            // Establecemos el nombre de fichero en el atributo de la entidad
+        // Establecemos el nombre de fichero en el atributo de la entidad
             $animale->setFoto($file_name);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('animales_listado');
         }
-
+ 
         return $this->render('animales/edit.html.twig', [
             'animale' => $animale,
             'form' => $form->createView(),
         ]);
     }
+
+    /* Adoptar el Animal*/ 
+    #[Route('/{id, usId}', name: 'animales_adoptar', methods: ['POST'])]
+    public function adoptarAnimales(Request $request, Animales $animale, User $user): Response
+    {
+        if ($this->isCsrfTokenValid('adoptar'.$animale->getId(), $request->request->get('_token'))) {
+           /*  $user = $this->$user->getId(); */
+            $animale=$animale->getId();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->$animale->setAdoptador($user->getId());
+            $entityManager->flush();
+        
+        }
+
+       return $this->redirectToRoute('animales_disponibles');
+    }
+
+
+
 /* Eliminar el Animal */
     #[Route('/{id}', name: 'animales_delete', methods: ['POST'])]
     public function delete(Request $request, Animales $animale): Response
@@ -114,22 +136,37 @@ class AnimalesController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$animale->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($animale);
-            /* $animale->getFicha()->setFallecido(true); */
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('animales_listado');
     }
 
 
-    #[Route('/{id}', name: 'animales_adoptar', methods: ['POST'])]
-    public function buscarAnimales(AnimalesRepository $animalesRepository): Response
+
+ 
+    #[Route('/buscador', name: 'app_buscador', methods: ['GET', 'POST'])]
+    public function buscarAnimales(Request $request, Animales $animale): Response
     {
-        return $this->render('animales/app_buscador.html.twig', [
-            'animales' => $animalesRepository->findAll(),/* SIN ADOPTAR */
+
+        $form = $this->createForm(AnimalesType::class, $animale);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           
+            $entityManager = $this->getDoctrine()->getManager();
+        /* Inicializa/Crea la Ficha con Datos Predeterminados */
+            
+            $entityManager->flush();
+
+            return $this->redirectToRoute('animales_listado');
+        }
+
+        return $this->render('animales/new.html.twig', [
+            'animale' => $animale,
+            'form' => $form->createView(),
         ]);
     }
-
+ 
 
 
 

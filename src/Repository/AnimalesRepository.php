@@ -19,26 +19,20 @@ class AnimalesRepository extends ServiceEntityRepository
         parent::__construct($registry, Animales::class);
     }
 
-
-    
-
-
-    // /**
-    //  * @return Animales[] Returns an array of Animales objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+    * @return Animales[] Returns an array of Animales objects
+    */
+/*Lista Todos los Animales SIN ADOPTAR */  
+    public function findByDisponible()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        ->andWhere('a.adoptador IS NULL')
+        ->orderBy('a.id', 'ASC')
+        ->getQuery()
+        ->getResult()
+    ; 
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Animales
