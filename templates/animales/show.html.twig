@@ -32,6 +32,14 @@
                 <td>{{ animale.tamano }}</td>
             </tr>
             <tr>
+                <th>Esterilizado</th>
+                {% if animale.ficha.esterilizado %}
+                    <td>Sí</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+            </tr>
+            <tr>
                 <th>Foto</th>
                  <td>
                     <img id="imgCabecera" src="../../img/{{ animale.foto }}" />

@@ -67,7 +67,6 @@ class AnimalesController extends AbstractController
 
             return $this->redirectToRoute('animales_listado');
         }
-
         return $this->render('animales/new.html.twig', [
             'animale' => $animale,
             'form' => $form->createView(),
@@ -133,33 +132,5 @@ class AnimalesController extends AbstractController
         }
         return $this->redirectToRoute('animales_listado');
     }
-
-
-
-    #[Route('/buscador', name: 'app_buscador', methods: ['GET', 'POST'])]
-    public function buscarAnimales(Request $request, Animales $animale): Response
-    {
-
-        $form = $this->createForm(AnimalesType::class, $animale);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-           
-            $entityManager = $this->getDoctrine()->getManager();
-        /* Inicializa/Crea la Ficha con Datos Predeterminados */
-            
-            $entityManager->flush();
-
-            return $this->redirectToRoute('animales_listado');
-        }
-
-        return $this->render('animales/new.html.twig', [
-            'animale' => $animale,
-            'form' => $form->createView(),
-        ]);
-    }
- 
-
-
 
 }

@@ -19,22 +19,59 @@
         Animales</a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         <li><a class="dropdown-item" href="{{ path('animales_disponibles') }}">Todos para Adoptar</a></li>
-        <li><a class="dropdown-item" {# id="filtro" #} href="{# {{ path('app_buscador') }} #}">FILTRAR</a></li>
+        <li><a class="dropdown-item"  id="filtro" href="{# {{ path('app_buscador') }} #}">FILTRAR</a></li>
 
 
-<div id="dialog" title="Busca Tú Peludo">
+<div id="dialog" title="Busca Tú Peludo...">
     <form>
-        <p>Especie<input type="select" id="especie" placeholder='Indica la Especie'></p>
-        <p>Raza<input type="select" id="raza" placeholder='Inserta la Raza'></p>
-        <p>Tamaño<input type="select" id="tamano" placeholder='Indica Tamaño'></p>
-        <p>Sexo<input type="select" id="sexo" placeholder='Inserta Sexo'></p>
-        <p>Edad<input type="select" id="edad" placeholder='Indica Edad'></p>
+    <ul>
+      <li>
+        <label>Especie: </label>
+        <select name='Especie'>
+          {% for a in animales %}
+            <option>{{a.especie}} </option>
+          {% endfor %}
+        </select>  
+      </li>
+      <li>
+        <label>Raza: </label>
+        <select name='Raza'>
+          {% for a in animales %}
+            <option>{{a.raza}} </option>
+          {% endfor %}
+        </select>
+      </li>
+      <li>
+    
+      <label>Tamaño: </label>
+        <select name='Tamano'>
+          {% for a in animales %}
+            <option>{{a.tamano}} </option>
+          {% endfor %}
+        </select>
+      </li>
+      <li>
+        <label>Sexo: </label>
+        <select name='Sexo'>
+          {% for a in animales %}
+            <option>{{a.sexo}} </option>
+          {% endfor %}
+        </select>
+      </li>
+      <li>
+        <label>Edad: </label>
+        <select name='Edad'>
+          {% for a in animales %}
+            <option>{{a.edad}} </option>
+          {% endfor %}
+        </select>
+      </li>
+    </ul>
     </form>
 </div>
 
 
-        <li><a class="dropdown-item" href="#">Gatos para Adoptar</a></li>
-        <li><a class="dropdown-item" href="#">Roedores y más para Adoptar</a></li>
+
         <!-- El Administrador tendrá las Opciones de Listar Todos los Animales o sólo los Adoptados-->
         {% if is_granted('ROLE_ADMIN') %}
         <hr>
@@ -90,8 +127,14 @@
                 autoOpen: false,
                 modal: true,
                 buttons: {
-                    'Añadir': function () {
-                      alert('Enviar Datos')
+                    'Filtrar': function () {
+                      alert('Enviar Datos');
+                      $('tr').append(
+                            `<td class="ui-state-default"><div>PRUEBAS</div>
+                            <div> PRUEBAS</div><div> PRUEBAS</div></td>`
+                        );
+                      $('form')[0].reset;
+                      $(this).dialog('close');
                     },
                     'Cancel': function () {
                         $(this).dialog('close');
