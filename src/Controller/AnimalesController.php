@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Fichas;
 use App\Entity\Animales;
-use App\Entity\User;
 use App\Form\AnimalesType;
 use App\Repository\AnimalesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -111,24 +110,18 @@ class AnimalesController extends AbstractController
         ]);
     }
 
-    /* Adoptar el Animal*/ 
-    #[Route('/{id, usId}', name: 'animales_adoptar', methods: ['POST'])]
-    public function adoptarAnimales(Request $request, Animales $animale, User $user): Response
+/* Adoptar el Animal*/ 
+    #[Route('/{id}', name: 'animales_adoptar', methods: ['POST'])]
+    public function adoptarAnimales(Request $request, Animales $animale): Response
     {
+        $user = $this->getUser(); //OBTENGO AL USUARIO ACTUALMENTE LOGUEADO
         if ($this->isCsrfTokenValid('adoptar'.$animale->getId(), $request->request->get('_token'))) {
-           /*  $user = $this->$user->getId(); */
-            $animale=$animale->getId();
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->$animale->setAdoptador($user->getId());
-            $entityManager->flush();
-        
+           $animale->setAdoptador($user);
+           $this->getDoctrine()->getManager()->flush();
         }
 
        return $this->redirectToRoute('animales_disponibles');
     }
-
-
-
 /* Eliminar el Animal */
     #[Route('/{id}', name: 'animales_delete', methods: ['POST'])]
     public function delete(Request $request, Animales $animale): Response
@@ -143,7 +136,6 @@ class AnimalesController extends AbstractController
 
 
 
- 
     #[Route('/buscador', name: 'app_buscador', methods: ['GET', 'POST'])]
     public function buscarAnimales(Request $request, Animales $animale): Response
     {
