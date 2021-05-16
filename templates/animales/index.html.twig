@@ -3,16 +3,73 @@
 {% block title %}Animales Listado{% endblock %}
 
 {% block body %}
-    <h1>Buscador Animales</h1>
 
-    <input type="text" id='formulario' class='form-control'>
-    <button class='btn btn-info mb-2' id='boton'>Buscar</button>
+    <div class='row'>
+        <div class='col offset-5' >
+            <button id='filtro' class='btn-success btn-lg'>Buscador Animales</button>
+        </div>
+    </div> 
+    <div id="dialog" title="Busca Tú Peludo...">
+        <form>
+            <ul>
+            <li>
+                <label>Especie: </label>
+                <select name='Especie'>
+                <option value='*'> Todas </option>
+                {% for a in animales %}
+                    <option>{{a.especie}} </option>                    
+                {% endfor %}
+                </select>  
+            </li>
+            <li>
+                <label>Raza: </label>
+                <select name='Raza'>
+                <option value='*'> Todas </option>
+                {% for a in animales %}
+                    <option>{{a.raza}} </option>
+                {% endfor %}
+                </select>
+            </li>
+            <li>
+            
+            <label>Tamaño: </label>
+                <select name='Tamano'>
+                <option value='*'> Todos </option>
+                {% for a in animales %}
+                    <option value='{{a.tamano}}'>{{a.tamano}} </option>
+                {% endfor %}
+                </select>
+            </li>
+            <li>
+                <label>Sexo: </label>
+                <select name='Sexo'>
+                <option value='*'> Tod@s </option>
+                {% for a in animales %}
+                    <option value='{{a.sexo}}'>{{a.sexo}} </option>
+                {% endfor %}
+                </select>
+            </li>
+            <li>
+                <label>Edad: </label>
+                <select name='Edad'>
+                <option value='*'> Todas </option>
+                {% for a in animales %}
+                    <option>{{a.edad}} </option>
+                {% endfor %}
+                </select>
+            </li>
+            </ul>
+        </form>
+    </div>
+    <div class='row'>
 
+    </div>
+   
+    
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id...Eliminar</th>
                 <th>Foto</th>
                 <th>Nombre</th>
                 <th>Sexo</th>
@@ -26,7 +83,6 @@
         <tbody>
         {% for animale in animales %}
             <tr>
-                <td>{{ animale.id }} </td>
                 <td>
                     <img id="imgCabecera" src="../../img/{{ animale.foto }}" />
                 </td>
@@ -56,32 +112,54 @@
     </table>
 
     {% if is_granted('ROLE_ADMIN')  %}
-        <button  class="btn offset-4 btn-outline-light">
+        <button  class="btn offset-5 btn-outline-light">
             <a href="{{ path('alta_animal') }}">Alta Nuevo Animal</a>
         </button>
     {% endif %}
-    <script>
-        const formulario =document.querySelector('#formulario');
-        const boton =document.querySelector('#boton');
-        const resultado = document.querySelector('#resultado');
-        const anim =document.querySelectorAll('tbody td')
+   
+   <script>
+        $(function () {
+            $('#filtro').click(function (e) {
+                e.preventDefault();
+                $('#dialog').dialog('open');
+            });
+            $('#dialog').dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    'Filtrar': function () {
+                 //     alert('Enviar Datos');
+                     
+                      $('tbody tr').each(function(){
+                        //    console.log($(this.children).eq(2).text());
+                        //    console.log('select '+$('form li:nth-child(4) select').val());
+                          
+                        if($(this.children).eq(2).text()!=$('form li:nth-child(4) select').val()){
+                            $(this).hide();
+                            console.log($(this.children).eq(2));
+                            
+                        }
 
-        const filtrar=()=>{
-            console.log (formulario.value);
-            const texto=formulario.value;
-            for(let a of anim){
-                if(a.indexOf(texto) !== -1){
-                    console.log(especie)
-                    resultado.innerHTML +=`<li>${especie}<li>`;
+
+
+                      })
+
+
+                     
+                     
+                     
+                      /*$('tr').append(
+                            `<td class="ui-state-default"><div>PRUEBAS</div>
+                            <div> PRUEBAS</div><div> PRUEBAS</div></td>`
+                        );*/
+                      $('form')[0].reset;
+                      $(this).dialog('close');
+                    },
+                    'Cancel': function () {
+                        $(this).dialog('close');
+                    }
                 }
-            }
-               
-             
-     
-           if (resultado.innerHTML ===' '){
-                resultado.innerHTML +=`<li>NO HAY<li>`;
-            }
-        }
-        boton.addEventListener('click',filtrar);
+            })
+        });
     </script>
 {% endblock %}
