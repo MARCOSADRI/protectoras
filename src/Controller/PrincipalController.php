@@ -15,4 +15,11 @@ class PrincipalController extends AbstractController
             'controller_name' => 'Bienvenido a Protectora S.O.N.P',
         ]);
     }
+    #[Route('/dashbord', name: 'inicio')]
+    public function inicio(): Response
+    {
+        return $this->render('principal/index1.html.twig', [
+            'controller_name' => 'Bienvenido a Protectora S.O.N.P',
+        ]);
+    }
 }
